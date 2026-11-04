@@ -32,6 +32,11 @@ main{max-width:640px;margin:0 auto;padding:12px}
 .eum{font-size:calc(17px*var(--fz));color:#6b5a46;margin:8px 0 6px;white-space:pre-line;word-break:keep-all}
 .pul{font-size:calc(18px*var(--fz));line-height:1.75;margin-top:8px;padding-top:8px;border-top:1px solid var(--line);word-break:keep-all}
 .lab{display:inline-block;font-size:12px;color:#fff;background:#b8946a;border-radius:6px;padding:0 6px;margin-right:6px;vertical-align:2px;font-style:normal;font-family:sans-serif}
+.card{border-left-width:8px}
+.mx{background:#fff7ef;border-color:#e2c3a6;border-left-color:#a0522d}.mx .book{color:#a0522d}.mx .lab{background:#b9774f}
+.cg{background:#f3f8ef;border-color:#c6dbbb;border-left-color:#4f7d3a}.cg .book{color:#3f6b2c}.cg .lab{background:#6d955a}
+.zg{background:#f1f5fb;border-color:#c3d2e6;border-left-color:#3f5f8f}.zg .book{color:#34507c}.zg .lab{background:#6580ab}
+.we{background:#f7f2fa;border-color:#d8c8e3;border-left-color:#7a4f96}.we .book{color:#6a3f86}.we .lab{background:#9171a8}
 .memo{background:#fff4e0;border:2px solid #d9a05b}
 .memo .book{color:var(--seal)}
 .memo .item{margin:10px 0 14px}
@@ -74,8 +79,8 @@ function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','
 let cur=null;
 function todayYMD(){const t=new Date();return [t.getFullYear(),t.getMonth()+1,t.getDate()];}
 function shift(ymd,k){const t=new Date(Date.UTC(ymd[0],ymd[1]-1,ymd[2]+k));return [t.getUTCFullYear(),t.getUTCMonth()+1,t.getUTCDate()];}
-function eastCard(name,hz,list,i){const x=list[i];return `<section class="card"><div class="head"><div class="book">${name}<span class="hz">${hz}</span></div><div class="no">${i+1} / ${list.length}</div></div><div class="chap">${esc(x.c)}</div><div class="orig">${esc(x.o)}</div><div class="eum"><span class="lab">음</span>${esc(x.e)}</div><div class="pul"><span class="lab">풀이</span>${esc(x.p)}</div></section>`;}
-function westCard(list,i){const x=list[i];const hz={'명상록':'Meditations · 마르쿠스 아우렐리우스','가난한 리처드의 달력':"Poor Richard's Almanack · 프랭클린",'잠언':'Book of Proverbs'}[x.b];return `<section class="card"><div class="head"><div class="book">${x.b}<span class="hz"></span></div><div class="no">서양 ${i+1} / ${list.length}</div></div><div class="chap">${esc(hz)} · ${esc(x.c)}</div><div class="en">${esc(x.en)}</div><div class="pul"><span class="lab">번역</span>${esc(x.ko)}</div></section>`;}
+function eastCard(name,hz,list,i){const x=list[i];const k={"명심보감":"mx","채근담":"cg","증광현문":"zg"}[name]||"";return `<section class="card ${k}"><div class="head"><div class="book">${name}<span class="hz">${hz}</span></div><div class="no">${i+1} / ${list.length}</div></div><div class="chap">${esc(x.c)}</div><div class="orig">${esc(x.o)}</div><div class="eum"><span class="lab">음</span>${esc(x.e)}</div><div class="pul"><span class="lab">풀이</span>${esc(x.p)}</div></section>`;}
+function westCard(list,i){const x=list[i];const hz={'명상록':'Meditations · 마르쿠스 아우렐리우스','가난한 리처드의 달력':"Poor Richard's Almanack · 프랭클린",'잠언':'Book of Proverbs'}[x.b];return `<section class="card we"><div class="head"><div class="book">${x.b}<span class="hz"></span></div><div class="no">서양 ${i+1} / ${list.length}</div></div><div class="chap">${esc(hz)} · ${esc(x.c)}</div><div class="en">${esc(x.en)}</div><div class="pul"><span class="lab">번역</span>${esc(x.ko)}</div></section>`;}
 const MEMO=`<section class="card memo"><div class="head"><div class="book">쌤의 메모<span class="hz">2026년 11월 5일</span></div></div>
 <div class="item"><div class="orig">天有不測風雨　人有朝夕禍福</div><div class="eum"><span class="lab">음</span>천유불측풍우 인유조석화복</div><div class="pul"><span class="lab">풀이</span>하늘에는 헤아릴 수 없는 비바람이 있고, 사람에게는 아침저녁으로 바뀌는 화와 복이 있다.</div><div class="src">명심보감 성심편(省心篇)</div></div>
 <div class="item"><div class="orig">禍兮福之所倚　福兮禍之所伏</div><div class="eum"><span class="lab">음</span>화혜복지소의 복혜화지소복</div><div class="pul"><span class="lab">풀이</span>화 속에는 복이 기대어 있고, 복 속에는 화가 엎드려 있다.</div><div class="src">노자(老子) 『도덕경』 제58장</div></div>
