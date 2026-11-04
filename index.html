@@ -7,7 +7,7 @@
 <meta name="referrer" content="no-referrer">
 <meta name="theme-color" content="#f4ecdc">
 <title>오늘의 한마디</title>
-<link rel="icon" href="icon2-192.png"><link rel="apple-touch-icon" href="apple-touch-icon2.png"><link rel="manifest" href="manifest2.json">
+<link rel="icon" href="favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="192x192" href="icon2-192.png"><link rel="shortcut icon" href="favicon.ico"><link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon2.png"><link rel="apple-touch-icon" href="apple-touch-icon2.png"><link rel="manifest" href="manifest2.json">
 <style>
 :root{--bg:#f4ecdc;--card:#fffaf0;--ink:#3b2f24;--sub:#7a6a58;--accent:#8a4b2a;--line:#e6d8bf;--seal:#b03a2e;--fz:1}
 *{box-sizing:border-box}
@@ -116,5 +116,6 @@ document.getElementById('smaller').onclick=()=>setFz(fz-0.1);
 document.getElementById('foot').innerHTML=`명심보감 ${D.mx.length} · 채근담 ${D.cg.length} · 증광현문 ${D.zg.length} · 서양 ${D.w.length}구절<br>원문은 옛 공개 판본(위키문헌 明心寶鑑·菜根譚 明刻本·增廣昔時賢文, George Long 역 『명상록』, 프랭클린 원문, KJV 잠언)에서, 음과 풀이는 새로 썼습니다.<br>시작일 2026-11-05 · 같은 날짜는 언제나 같은 구절`;
 render(parseHash()||todayYMD());
 </script>
+<script>if("serviceWorker" in navigator)navigator.serviceWorker.register("sw.js");</script>
 </body>
 </html>
