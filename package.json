@@ -1,0 +1,10 @@
+{
+  "name": "hanmadi-daily",
+  "private": true,
+  "scripts": {
+    "test": "node --test test/corpus.test.js test/offline.test.js"
+  },
+  "devDependencies": {
+    "puppeteer-core": "^24.15.0"
+  }
+}
