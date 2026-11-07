@@ -18,7 +18,7 @@ const OLD_HTML = `<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"><ti
 <script>if("serviceWorker" in navigator)navigator.serviceWorker.register("sw.js");</script>
 </body></html>`;
 
-const OLD_SW = `const CACHE='hanmadi-v143';
+const OLD_SW = `const CACHE='hanmadi-v293';
 self.addEventListener('install',e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(['./','./index.html'])).then(()=>self.skipWaiting()));});
 self.addEventListener('activate',e=>{e.waitUntil(self.clients.claim());});
 self.addEventListener('fetch',e=>{
@@ -83,7 +83,7 @@ async function waitFor(page, fn, message) {
   }
 }
 
-test('offline cache replaces an older corpus and still shows the lower collection', { timeout: 120000 }, async (t) => {
+test('offline cache replaces the previous corpus and shows 海味不鹹', { timeout: 120000 }, async (t) => {
   if (!CHROME) {
     assert.fail('Chrome is required for the service-worker test');
   }
@@ -102,7 +102,7 @@ test('offline cache replaces an older corpus and still shows the lower collectio
   const base = `http://127.0.0.1:${port}/`;
   await page.goto(base, { waitUntil: 'networkidle0' });
   await waitFor(page, () => navigator.serviceWorker.controller, 'old controller');
-  await page.waitForFunction(async () => (await caches.keys()).includes('hanmadi-v143'));
+  await page.waitForFunction(async () => (await caches.keys()).includes('hanmadi-v293'));
   assert.match(await page.$eval('#mark', el => el.textContent), /UPPER_ONLY_143/);
 
   setMode('new');
@@ -117,30 +117,29 @@ test('offline cache replaces an older corpus and still shows the lower collectio
   await page.reload({ waitUntil: 'networkidle0' });
   await waitFor(page, async () => {
     const keys = await caches.keys();
-    return keys.includes('hanmadi-v293') && !keys.includes('hanmadi-v143') && document.body.innerText.includes('증광현문 293');
+    return keys.includes('hanmadi-cg141') && !keys.includes('hanmadi-v293') && document.body.innerText.includes('채근담 141');
   }, 'updated cache');
 
-  await page.goto(base + 'index.html#2027-03-27', { waitUntil: 'networkidle0' });
-  assert.match(await page.$eval('#date', el => el.textContent), /2027년 3월 27일/);
+  await page.goto(base + 'index.html#2027-03-24', { waitUntil: 'networkidle0' });
+  assert.match(await page.$eval('#date', el => el.textContent), /2027년 3월 24일/);
   let body = await page.$eval('#cards', el => el.innerText);
-  assert.match(body, /상집\(上集\)/);
-  assert.match(body, /掬水月在手，弄花香滿衣。/);
-  assert.doesNotMatch(body, /하집\(下集\)/);
-  assert.match(body, /143 \/ 293/);
+  assert.match(body, /花看半開/);
+  assert.doesNotMatch(body, /海味不鹹/);
+  assert.match(body, /140 \/ 141/);
 
   await page.click('#next');
-  await page.waitForFunction(() => location.hash === '#2027-03-28');
-  assert.match(await page.$eval('#date', el => el.textContent), /2027년 3월 28일/);
+  await page.waitForFunction(() => location.hash === '#2027-03-25');
+  assert.match(await page.$eval('#date', el => el.textContent), /2027년 3월 25일/);
   body = await page.$eval('#cards', el => el.innerText);
-  assert.match(body, /하집\(下集\)/);
-  assert.match(body, /世上無難事，只怕不專心。/);
-  assert.match(body, /세상무난사, 지파부전심\./);
-  assert.match(body, /세상에 어려운 일은 없다/);
-  assert.match(body, /144 \/ 293/);
+  assert.match(body, /전집 제84장\(前集 第84\)/);
+  assert.match(body, /清能有容，仁能善斷；明不傷察，直不過矯。是謂蜜餞不甜，海味不鹹，纔是懿德。/);
+  assert.match(body, /청능유용, 인능선단; 명불상찰, 직불과교\. 시위밀전불첨, 해미불함, 재시의덕\./);
+  assert.match(body, /바닷가 음식이 짜지 않은/);
+  assert.match(body, /141 \/ 141/);
   const foot = await page.$eval('#foot', el => el.innerText);
   assert.match(foot, /시작일 2026-11-05/);
   assert.match(foot, /같은 날짜는 언제나 같은 구절/);
-  assert.match(foot, /증광현문 293/);
+  assert.match(foot, /채근담 141/);
 
   const first = await page.$eval('#cards', el => el.innerText);
   await page.reload({ waitUntil: 'networkidle0' });
@@ -149,10 +148,10 @@ test('offline cache replaces an older corpus and still shows the lower collectio
   await page.setOfflineMode(true);
   await page.reload({ waitUntil: 'domcontentloaded' });
   body = await page.$eval('#cards', el => el.innerText);
-  assert.match(body, /하집\(下集\)/);
-  assert.match(body, /世上無難事，只怕不專心。/);
-  assert.match(body, /144 \/ 293/);
-  assert.match(await page.$eval('#foot', el => el.innerText), /증광현문 293/);
+  assert.match(body, /海味不鹹/);
+  assert.match(body, /전집 제84장\(前集 第84\)/);
+  assert.match(body, /141 \/ 141/);
+  assert.match(await page.$eval('#foot', el => el.innerText), /채근담 141/);
   const keys = await page.evaluate(async () => await caches.keys());
-  assert.deepEqual(keys, ['hanmadi-v293']);
+  assert.deepEqual(keys, ['hanmadi-cg141']);
 });
