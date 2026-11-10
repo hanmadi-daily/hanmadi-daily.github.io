@@ -1,4 +1,4 @@
-const CACHE = 'hanmadi-cg356';
+const CACHE = 'hanmadi-cg356b';
 const PRECACHE = [
   './',
   './index.html',

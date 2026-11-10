@@ -285,9 +285,37 @@ test('today follows the Korea civil date across midnight, leap day, and the new 
   assert.equal(dayIndex(...ymdInSeoul(new Date('2026-11-04T15:30:00Z'))), 0);
 });
 
+test('owner corrections agree in original, reading, and gloss', () => {
+  const by = c => D.cg.find(x => x.c.startsWith(c));
+  const expect = [
+    ['전집 제70장', '延福祉', '연복지', '복을 이어'],
+    ['전집 제173장', '心易昏冥', '심이혼명', '어두워지니'],
+    ['전집 제173장', '宜惺惺而主以寂寂', '의성성이주이적적', '고요함을 주장'],
+    ['후집 제3장', '鶯花', '앵화무', '꾀꼬리와 꽃'],
+    ['후집 제17장', '不嫌盡醉', '이불혐진취', '꺼리지 않으며'],
+    ['후집 제17장', '恬淡適己', '염담적기', '담담함'],
+    ['후집 제72장', '得失蝟興', '득실위흥', '얻고 잃음'],
+    ['후집 제95장', '心空則境空。\n去境在心者', '심공즉경공.\n거경재심자', '경계를 버리면서도'],
+    ['후집 제101장', '問以鼎食', '문이정식', '귀한 밥'],
+    ['후집 제106장', '贅旒矣', '췌류의', '속할 뿐이다'],
+    ['후집 제123장', '豢養', '환양', '길러 먹이는'],
+    ['후집 제125장', '駔儈', '장회', '거간'],
+    ['후집 제126장', '機阱', '기정', '함정'],
+    ['후집 제128장', '封侯事', '봉후사', '제후'],
+    ['후집 제131장', '聰明減', '총명감', '총명'],
+  ];
+  for (const [chap, o, e, p] of expect) {
+    const x = by(chap);
+    assert.ok(x.o.includes(o), chap + ' o');
+    assert.ok(x.e.includes(e), chap + ' e');
+    assert.ok(x.p.includes(p), chap + ' p');
+  }
+  assert.equal(D.cg.length, 356);
+});
+
 test('service worker caches only the current corpus version', () => {
   const sw = fs.readFileSync(path.join(root, 'sw.js'), 'utf8');
-  assert.match(sw, /const CACHE = 'hanmadi-cg356'/);
+  assert.match(sw, /const CACHE = 'hanmadi-cg356b'/);
   assert.match(sw, /caches\.delete\(key\)/);
   assert.match(sw, /cache\.match\(request\)/);
   assert.equal(sw.includes('caches.match('), false);

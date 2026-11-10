@@ -117,7 +117,7 @@ test('offline cache replaces the previous corpus and shows 海味不鹹', { time
   await page.reload({ waitUntil: 'networkidle0' });
   await waitFor(page, async () => {
     const keys = await caches.keys();
-    return keys.includes('hanmadi-cg356') && !keys.includes('hanmadi-v293') && document.body.innerText.includes('채근담 356');
+    return keys.includes('hanmadi-cg356b') && !keys.includes('hanmadi-v293') && document.body.innerText.includes('채근담 356');
   }, 'updated cache');
 
   await page.goto(base + 'index.html#2027-03-24', { waitUntil: 'networkidle0' });
@@ -153,5 +153,5 @@ test('offline cache replaces the previous corpus and shows 海味不鹹', { time
   assert.match(body, /141 \/ 356/);
   assert.match(await page.$eval('#foot', el => el.innerText), /채근담 356/);
   const keys = await page.evaluate(async () => await caches.keys());
-  assert.deepEqual(keys, ['hanmadi-cg356']);
+  assert.deepEqual(keys, ['hanmadi-cg356b']);
 });
