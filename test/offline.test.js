@@ -117,7 +117,7 @@ test('offline cache replaces the previous corpus and shows 海味不鹹', { time
   await page.reload({ waitUntil: 'networkidle0' });
   await waitFor(page, async () => {
     const keys = await caches.keys();
-    return keys.includes('hanmadi-cg141') && !keys.includes('hanmadi-v293') && document.body.innerText.includes('채근담 141');
+    return keys.includes('hanmadi-cg356') && !keys.includes('hanmadi-v293') && document.body.innerText.includes('채근담 356');
   }, 'updated cache');
 
   await page.goto(base + 'index.html#2027-03-24', { waitUntil: 'networkidle0' });
@@ -125,7 +125,7 @@ test('offline cache replaces the previous corpus and shows 海味不鹹', { time
   let body = await page.$eval('#cards', el => el.innerText);
   assert.match(body, /花看半開/);
   assert.doesNotMatch(body, /海味不鹹/);
-  assert.match(body, /140 \/ 141/);
+  assert.match(body, /140 \/ 356/);
 
   await page.click('#next');
   await page.waitForFunction(() => location.hash === '#2027-03-25');
@@ -135,11 +135,11 @@ test('offline cache replaces the previous corpus and shows 海味不鹹', { time
   assert.match(body, /清能有容，仁能善斷；明不傷察，直不過矯。是謂蜜餞不甜，海味不鹹，纔是懿德。/);
   assert.match(body, /청능유용, 인능선단; 명불상찰, 직불과교\. 시위밀전불첨, 해미불함, 재시의덕\./);
   assert.match(body, /바닷가 음식이 짜지 않은/);
-  assert.match(body, /141 \/ 141/);
+  assert.match(body, /141 \/ 356/);
   const foot = await page.$eval('#foot', el => el.innerText);
   assert.match(foot, /시작일 2026-11-05/);
   assert.match(foot, /같은 날짜는 언제나 같은 구절/);
-  assert.match(foot, /채근담 141/);
+  assert.match(foot, /채근담 356/);
 
   const first = await page.$eval('#cards', el => el.innerText);
   await page.reload({ waitUntil: 'networkidle0' });
@@ -150,8 +150,8 @@ test('offline cache replaces the previous corpus and shows 海味不鹹', { time
   body = await page.$eval('#cards', el => el.innerText);
   assert.match(body, /海味不鹹/);
   assert.match(body, /전집 제84장\(前集 第84\)/);
-  assert.match(body, /141 \/ 141/);
-  assert.match(await page.$eval('#foot', el => el.innerText), /채근담 141/);
+  assert.match(body, /141 \/ 356/);
+  assert.match(await page.$eval('#foot', el => el.innerText), /채근담 356/);
   const keys = await page.evaluate(async () => await caches.keys());
-  assert.deepEqual(keys, ['hanmadi-cg141']);
+  assert.deepEqual(keys, ['hanmadi-cg356']);
 });

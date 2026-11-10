@@ -68,7 +68,7 @@ test('lengths, epoch, and unchanged upper and other books', () => {
   assert.deepEqual(START, [2026, 11, 5]);
   assert.equal(D.start, '2026-11-05');
   assert.equal(D.mx.length, 151);
-  assert.equal(D.cg.length, 141);
+  assert.equal(D.cg.length, 356);
   assert.equal(D.zg.length, 293);
   assert.equal(D.w.length, 141);
   assert.equal(sha256(JSON.stringify(D.mx)), UPPER_SHA.mx);
@@ -150,7 +150,8 @@ test('same day is deterministic and the next year does not reset', () => {
   assert.notEqual(pick(2028, 11, 5).n, 0);
   assert.equal(365 % 143, 79);
   assert.equal(365 % 140, 85);
-  assert.deepEqual(pick(2027, 11, 5), { n: 365, mx: 63, cg: 83, zg: 72, w: 83 });
+  assert.equal(365 % 356, 9);
+  assert.deepEqual(pick(2027, 11, 5), { n: 365, mx: 63, cg: 9, zg: 72, w: 83 });
   assert.notEqual(pick(2027, 11, 5).zg, 0);
   assert.equal(D.zg[72].c, '상집(上集)');
 });
@@ -169,7 +170,7 @@ test('dates before 2027-03-28 keep the old 증광현문 pick; the first lower pa
   assert.notEqual(pick(2027, 3, 28).zg, 143 % 143);
   assert.equal(D.zg[143].c, '하집(下集)');
   assert.equal(pick(2027, 3, 28).mx, 143 % 151);
-  assert.equal(pick(2027, 3, 28).cg, 143 % 141);
+  assert.equal(pick(2027, 3, 28).cg, 143 % 356);
   assert.equal(pick(2027, 3, 28).w, 143 % 141);
   const later = pick(2027, 3, 28);
   assert.deepEqual(shift([2027, 3, 27], 1), [2027, 3, 28]);
@@ -189,30 +190,24 @@ test('year and leap-day boundaries stay on the continuous day count', () => {
   assert.equal(pick(2028, 2, 29).n + 1, pick(2028, 3, 1).n);
 });
 
-test('cycle after appending one 채근담 passage is the LCM, not the old coprime product', () => {
+test('356 채근담 passages restore a pairwise-coprime lifetime cycle', () => {
   const lens = [D.mx.length, D.cg.length, D.zg.length, D.w.length];
-  assert.deepEqual(lens, [151, 141, 293, 141]);
-  assert.equal(gcd(151, 141), 1);
-  assert.equal(gcd(151, 293), 1);
-  assert.equal(gcd(293, 141), 1);
-  assert.equal(gcd(141, 141), 141);
-  const cycle = lens.reduce(lcm);
-  assert.equal(cycle, 6238263);
-  assert.ok(cycle < 873356820);
+  assert.deepEqual(lens, [151, 356, 293, 141]);
+  for (let i = 0; i < lens.length; i++) {
+    for (let j = i + 1; j < lens.length; j++) assert.equal(gcd(lens[i], lens[j]), 1);
+  }
+  const cycle = lens.reduce((a, b) => lcm(a, b), 1);
+  assert.equal(cycle, 151 * 356 * 293 * 141);
+  assert.ok(cycle > 873356820);
   assert.deepEqual(pick(2026, 11, 5), { n: 0, mx: 0, cg: 0, zg: 0, w: 0 });
-  assert.equal(mod(cycle, 151), 0);
-  assert.equal(mod(cycle, 141), 0);
-  assert.equal(mod(cycle, 293), 0);
-  assert.notEqual(mod(cycle - 1, 293), 0);
+  assert.notEqual(mod(cycle - 1, 356), 0);
   const seen = new Set();
   const horizon = 200 * 366;
   for (let n = 0; n < horizon; n++) {
-    const key = [mod(n, 151), mod(n, 141), mod(n, 293), mod(n, 141)].join(',');
+    const key = [mod(n, 151), mod(n, 356), mod(n, 293), mod(n, 141)].join(',');
     assert.equal(seen.has(key), false);
     seen.add(key);
-    assert.equal(mod(n, 141), mod(n, D.w.length));
   }
-  assert.equal(seen.size, horizon);
 });
 
 test('every lower passage is reachable on the rotation', () => {
@@ -236,7 +231,7 @@ test('海味不鹹 is the Wikisource 明刻本 前集 84 text and is appended', 
   assert.ok(card.includes(x.e));
   assert.ok(card.includes(x.p));
   assert.ok(card.includes('전집 제84장(前集 第84)'));
-  assert.match(card, />141 \/ 141</);
+  assert.match(card, />141 \/ 356</);
 });
 
 test('채근담 stays on the old passage through 2027-03-24 and shows 海味 on 2027-03-25', () => {
@@ -251,7 +246,31 @@ test('채근담 stays on the old passage through 2027-03-24 and shows 海味 on 
   assert.equal(pick(2027, 3, 25).mx, 140 % 151);
   assert.equal(pick(2027, 3, 25).zg, 140);
   assert.equal(pick(2027, 3, 25).w, 140);
-  assert.equal(pick(2027, 3, 25).cg, pick(2027, 3, 25).w);
+  for (let n = 0; n <= 140; n++) assert.equal(n % 356, n % 141);
+  assert.deepEqual(shift([2026, 11, 5], 141), [2027, 3, 26]);
+  assert.equal(pick(2027, 3, 26).cg, 141);
+  assert.equal(D.cg[141].c, '전집 제4장(前集 第4)');
+});
+
+test('appended passages complete 明刻本 222 and 134 without changing the first 141', () => {
+  assert.equal(sha256(JSON.stringify(D.cg.slice(0, 140))), UPPER_SHA.cg);
+  const seen = new Set();
+  const qian = new Set();
+  const hou = new Set();
+  for (const x of D.cg) {
+    assert.equal(seen.has(x.o), false);
+    seen.add(x.o);
+    assert.ok(x.p && x.e);
+    const han = (x.o.match(/[\u4e00-\u9fff]/g) || []).length;
+    const syl = (x.e.match(/[가-힣]/g) || []).length;
+    assert.equal(han, syl, x.c);
+    const n = +x.c.match(/第(\d+)/)[1];
+    (x.c.startsWith('전집') ? qian : hou).add(n);
+  }
+  assert.equal(qian.size, 222);
+  assert.equal(hou.size, 134);
+  for (let i = 1; i <= 222; i++) assert.equal(qian.has(i), true);
+  for (let i = 1; i <= 134; i++) assert.equal(hou.has(i), true);
 });
 
 test('today follows the Korea civil date across midnight, leap day, and the new year', () => {
@@ -268,7 +287,7 @@ test('today follows the Korea civil date across midnight, leap day, and the new 
 
 test('service worker caches only the current corpus version', () => {
   const sw = fs.readFileSync(path.join(root, 'sw.js'), 'utf8');
-  assert.match(sw, /const CACHE = 'hanmadi-cg141'/);
+  assert.match(sw, /const CACHE = 'hanmadi-cg356'/);
   assert.match(sw, /caches\.delete\(key\)/);
   assert.match(sw, /cache\.match\(request\)/);
   assert.equal(sw.includes('caches.match('), false);
