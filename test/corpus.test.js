@@ -14,9 +14,9 @@ const UPPER_SHA = {
   mx: '40f5a9ab49167749b553cc416ae64b47712b8d4662ece02e9ddc7b31b01a514a',
   cg: 'cb2fbc14465f49c0333f6d1240afed816c74776173ee3e8cbb57e6fde258d1bf',
   zg: '00c98bebac7da51d80e28831f05f993b9d8720caae7077c53ce55e8e88d0c7a6',
-  w: '604ee83533e7a86bcbb32b55f1ca5462a2d0853800abc568daffa979de114d8a'
+  w: '4be55d41037ad63dc65b5232ccfe7f37e3134c77c27e299ed1b53f290532e6e6'
 };
-const FOOT = "document.getElementById('foot').innerHTML=`명심보감 ${D.mx.length} · 채근담 ${D.cg.length} · 증광현문 ${D.zg.length} · 서양 ${D.w.length}구절<br>원문은 옛 공개 판본(위키문헌 明心寶鑑·菜根譚 明刻本·增廣昔時賢文, George Long 역 『명상록』, 프랭클린 원문, KJV 잠언)에서, 음과 풀이는 새로 썼습니다.<br>시작일 2026-11-05 · 같은 날짜는 언제나 같은 구절`;";
+const FOOT = "document.getElementById('foot').innerHTML=`명심보감 ${D.mx.length} · 채근담 ${D.cg.length} · 증광현문 ${D.zg.length} · 서양 ${D.w.length}구절<br>원문은 옛 공개 판본(위키문헌 明心寶鑑·菜根譚 明刻本·增廣昔時賢文, George Long 역 『명상록』, 프랭클린 원문, KJV 잠언)에서, 음과 풀이는 새로 썼습니다. 영어 구절은 이 공개 판본의 옛 말투(thou·thy·-eth)만 오늘 영어로 고쳤습니다.<br>시작일 2026-11-05 · 같은 날짜는 언제나 같은 구절`;";
 const REQUIRED = ['o', 'e', 'p', 'c', 'src', 'local', 'source', 'source_index_in_zg_all', 'lower_collection_no'];
 
 function sha256(s) {
