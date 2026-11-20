@@ -54,6 +54,20 @@ main{max-width:640px;margin:0 auto;padding:12px}
 .theme .item:last-child{border-bottom:0;padding-bottom:0}
 .theme .src{font-size:calc(14px*var(--fz));color:var(--sub);margin-top:6px}
 .theme-sub{font-size:calc(14px*var(--fz));color:var(--sub);margin:-2px 0 8px}
+.theme-item .book{font-size:calc(15px*var(--fz))}
+.theme-item .src{font-size:calc(14px*var(--fz));color:var(--sub);margin-top:6px}
+.tk-east{background:#f6f3ea;border-color:#d3cbb8;border-left-color:#5c5346}
+.tk-east .book{color:#5c5346}
+.tk-east .lab{background:#7a7264}
+.tk-ko{background:#fff6e4;border-color:#e6c98a;border-left-color:#b8872a}
+.tk-ko .book{color:#8a6414}
+.tk-ko .lab{background:#c9a44a}
+.tk-en{background:#f3f6f8;border-color:#c5d0d6;border-left-color:#4a6670}
+.tk-en .book{color:#3d5560}
+.tk-en .lab{background:#6a8490}
+.tk-maxim{background:#eef7f5;border-color:#b7d4cc;border-left-color:#2f6f62}
+.tk-maxim .book{color:#2a5c52}
+.tk-maxim .lab{background:#4f8a7c}
 .theme-index{list-style:none;margin:0;padding:0}
 .theme-index li{border-bottom:1px dashed var(--line)}
 .theme-index a{display:block;padding:10px 4px;color:var(--ink);text-decoration:none;font-size:calc(18px*var(--fz))}
@@ -160,15 +174,32 @@ function orderedItems(theme){
   }
   return rest.concat(ko.slice(0,1),en.slice(0,1));
 }
+function themeKindInfo(it){
+  const kind=it&&it.kind||'';
+  const src=it&&it.source||'';
+  if(kind==='proverb_ko') return {cls:'tk-ko',label:'우리 속담'};
+  if(kind==='idiom') return {cls:'tk-ko',label:'우리 말'};
+  if(kind==='proverb_en') return {cls:'tk-en',label:'영국 속담'};
+  if(kind==='maxim') return {cls:'tk-maxim',label:'법칙'};
+  if(kind==='west'){
+    if(/KJV|잠언|욥기|Proverbs|Job|성경/i.test(src)) return {cls:'we',label:'성경'};
+    return {cls:'we',label:'서양'};
+  }
+  if(/증광현문/.test(src)) return {cls:'zg',label:'증광현문'};
+  if(/채근담/.test(src)) return {cls:'cg',label:'채근담'};
+  if(/명심보감/.test(src)) return {cls:'mx',label:'명심보감'};
+  return {cls:'tk-east',label:'한문 고전'};
+}
 function themeItemHtml(it){
   const hasEum=!!it.e;
   const raw=it.o||it.en||'';
   const isWest=/[A-Za-z]/.test(raw) && !/[\u4e00-\u9fff]/.test(raw);
-  let h='<div class="item">';
+  const info=themeKindInfo(it);
+  let h='<section class="card theme-item '+info.cls+'"><div class="head"><div class="book">'+esc(info.label)+'</div></div>';
   h+='<div class="'+(isWest?'en':'orig')+'">'+esc(raw)+'</div>';
   if(hasEum) h+='<div class="eum"><span class="lab">음</span>'+esc(it.e)+'</div>';
   h+='<div class="pul"><span class="lab">풀이</span>'+esc(it.p)+'</div>';
-  h+='<div class="src">'+esc(it.source||'')+'</div></div>';
+  h+='<div class="src">'+esc(it.source||'')+'</div></section>';
   return h;
 }
 function themeCard(theme, opt){
@@ -177,10 +208,11 @@ function themeCard(theme, opt){
   const items=orderedItems(theme);
   let h='<section class="card theme"><div class="head"><div class="book">오늘의 주제<span class="hz">'+esc(theme.title)+'</span></div><div class="no">'+esc(opt.caption||'')+'</div></div>';
   if(opt.sub) h+='<div class="theme-sub">'+esc(opt.sub)+'</div>';
-  for(const it of items) h+=themeItemHtml(it);
   h+='</section>';
+  for(const it of items) h+=themeItemHtml(it);
   return h;
 }
+
 function themeIndexHtml(){
   const list=(typeof THEMES==='undefined'?[]:THEMES).slice().sort((a,b)=>(a.order-b.order)||String(a.id).localeCompare(b.id));
   let h='<section class="card theme"><div class="head"><div class="book">주제 목차<span class="hz">오늘의 주제</span></div><div class="no">'+list.length+'개</div></div>';
