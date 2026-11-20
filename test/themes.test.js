@@ -144,6 +144,9 @@ test('day page keeps four books and only a jump to the theme-day view', () => {
   assert.ok(parseSrc.includes('theme-day'));
   const applySrc = html.slice(html.indexOf('function applyView()'), html.indexOf("document.getElementById('prev')"));
   assert.ok(applySrc.includes("v.type==='theme-day'"));
+  const chromeSrc = html.slice(html.indexOf('function setChrome'), html.indexOf('function showThemeDay'));
+  assert.ok(chromeSrc.includes("mode==='index'||mode==='theme'"));
+  assert.ok(chromeSrc.includes('dateNav.classList.add'));
 });
 
 test('theme files and the injected bundle stay in the basic multilingual plane', () => {
