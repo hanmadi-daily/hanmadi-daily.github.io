@@ -130,3 +130,37 @@ test('existing footer text is unchanged', () => {
   const FOOT = "document.getElementById('foot').innerHTML=`명심보감 ${D.mx.length} · 채근담 ${D.cg.length} · 증광현문 ${D.zg.length} · 서양 ${D.w.length}구절<br>원문은 옛 공개 판본(위키문헌 明心寶鑑·菜根譚 明刻本·增廣昔時賢文, George Long 역 『명상록』, 프랭클린 원문, KJV 잠언)에서, 음과 풀이는 새로 썼습니다. 영어 구절은 이 공개 판본의 옛 말투(thou·thy·-eth)만 오늘 영어로 고쳤습니다.<br>시작일 2026-11-05 · 같은 날짜는 언제나 같은 구절`;";
   assert.ok(html.includes(FOOT));
 });
+
+test('day page keeps four books and only a jump to the theme-day view', () => {
+  const renderSrc = html.slice(html.indexOf('function render(ymd)'), html.indexOf('function parseHash'));
+  assert.ok(renderSrc.includes("themeBox.innerHTML=''") || renderSrc.includes('themeBox.innerHTML=""'));
+  assert.equal(renderSrc.includes('themeCard('), false);
+  assert.ok(renderSrc.includes("setChrome('day'"));
+  assert.ok(html.includes('id="themeTodayBtn"'));
+  assert.ok(html.includes('오늘의 주제 ▶'));
+  assert.ok(html.includes('function showThemeDay'));
+  assert.ok(html.includes('#theme-day/'));
+  const parseSrc = html.slice(html.indexOf('function parseView()'), html.indexOf('function render(ymd)'));
+  assert.ok(parseSrc.includes('theme-day'));
+  const applySrc = html.slice(html.indexOf('function applyView()'), html.indexOf("document.getElementById('prev')"));
+  assert.ok(applySrc.includes("v.type==='theme-day'"));
+});
+
+test('theme files and the injected bundle stay in the basic multilingual plane', () => {
+  const { THEMES } = loadThemesFromHtml();
+  for (const n of themeFiles()) {
+    const text = fs.readFileSync(path.join(dir, n), 'utf8');
+    for (const ch of text) {
+      assert.ok(ch.codePointAt(0) <= 0xFFFF, n + ' U+' + ch.codePointAt(0).toString(16).toUpperCase());
+    }
+  }
+  const bundledText = fs.readFileSync(path.join(root, 'data', 'themes.json'), 'utf8');
+  for (const ch of bundledText) {
+    assert.ok(ch.codePointAt(0) <= 0xFFFF, 'themes.json U+' + ch.codePointAt(0).toString(16).toUpperCase());
+  }
+  const hansali = THEMES.find(t => t.id === 'hansali');
+  const bo = hansali.items.find(it => (it.o || '').includes('保：'));
+  assert.ok(bo, '保 item');
+  assert.ok(bo.o.includes('从古文孚省'));
+  assert.equal(bo.o.includes('\uD851\uDCFD') || [...bo.o].some(c => c.codePointAt(0) === 0x244FD), false);
+});
