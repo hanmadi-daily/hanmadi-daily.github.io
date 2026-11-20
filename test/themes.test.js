@@ -25,7 +25,7 @@ function loadThemeFns() {
   assert.ok(start > 0 && end > start, 'theme runtime');
   const prelude = html.slice(html.indexOf('/* THEMES-BEGIN */'), html.indexOf('/* THEMES-END */') + '/* THEMES-END */'.length);
   const helpers = 'function esc(s){return String(s);}\nfunction todayYMD(){return [2026,11,21];}\n';
-  return new Function(prelude + helpers + html.slice(start, end) + '\nreturn {THEME_START,THEMES,themeStartYMD,themeDayIndex,themeSinceDay,themesForDay,orderedItems,findTheme,themeIndexHtml,themeCard};')();
+  return new Function(prelude + helpers + html.slice(start, end) + '\nreturn {THEME_START,THEMES,themeStartYMD,themeDayIndex,themeSinceDay,themesForDay,orderedItems,findTheme,themeIndexHtml,themeCard,themeKindInfo,themeItemHtml};')();
 }
 
 test('every theme file is in the bundle and in the page', () => {
@@ -166,4 +166,31 @@ test('theme files and the injected bundle stay in the basic multilingual plane',
   assert.ok(bo, '保 item');
   assert.ok(bo.o.includes('从古文孚省'));
   assert.equal(bo.o.includes('\uD851\uDCFD') || [...bo.o].some(c => c.codePointAt(0) === 0x244FD), false);
+});
+
+test('theme items are separate colored cards with a kind label', () => {
+  const { themeCard, themeKindInfo, THEMES } = loadThemeFns();
+  const innae = THEMES.find(t => t.id === 'innae');
+  const card = themeCard(innae, { caption: '그날의 주제' });
+  assert.equal((card.match(/class="card theme"/g) || []).length, 1);
+  assert.ok((card.match(/class="card theme-item /g) || []).length >= 5);
+  assert.ok(card.includes('증광현문'));
+  assert.ok(card.includes('채근담'));
+  assert.ok(card.includes('한문 고전'));
+  assert.ok(card.includes('우리 속담'));
+  assert.ok(card.includes('영국 속담'));
+  const zg = innae.items.find(it => /증광현문/.test(it.source));
+  assert.deepEqual(themeKindInfo(zg), { cls: 'zg', label: '증광현문' });
+  const saegil = THEMES.find(t => t.id === 'saegil');
+  const job = saegil.items.find(it => /욥기/.test(it.source));
+  assert.equal(themeKindInfo(job).cls, 'we');
+  assert.equal(themeKindInfo(job).label, '성경');
+  const yoji = THEMES.find(t => t.id === 'yojigyeong');
+  assert.equal(themeKindInfo(yoji.items[0]).cls, 'tk-maxim');
+  assert.equal(themeKindInfo(yoji.items[0]).label, '법칙');
+  // day-page book colors stay in their original rules
+  assert.ok(html.includes('.mx{background:#fff7ef;border-color:#e2c3a6;border-left-color:#a0522d}'));
+  assert.ok(html.includes('.cg{background:#f3f8ef;border-color:#c6dbbb;border-left-color:#4f7d3a}'));
+  assert.ok(html.includes('.zg{background:#f1f5fb;border-color:#c3d2e6;border-left-color:#3f5f8f}'));
+  assert.ok(html.includes('.we{background:#f7f2fa;border-color:#d8c8e3;border-left-color:#7a4f96}'));
 });
