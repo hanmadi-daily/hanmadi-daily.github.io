@@ -1,0 +1,40 @@
+{
+  "id": "ujeong",
+  "title": "우정",
+  "order": 4,
+  "items": [
+    {
+      "kind": "east",
+      "o": "《禮記》曰：「獨學無友，則孤陋寡聞。」",
+      "e": "예기왈: “독학무우, 즉고루과문.”",
+      "p": "『예기』에 이르기를, “벗 없이 혼자 배우면 견문이 좁고 들은 것이 적어진다.”",
+      "source": "명심보감 권학편(勸學篇) (위키문헌 明心寶鑑, 앱 수록)"
+    },
+    {
+      "kind": "east",
+      "o": "宋弘曰：「糟糠之妻不下堂，貧賤之交不可忘。」",
+      "e": "송홍왈: “조강지처불하당, 빈천지교불가망.”",
+      "p": "송홍이 말하였다. “가난할 때 함께 고생한 아내는 내쫓지 않고, 가난하고 천할 때 사귄 벗은 잊지 않는다.”",
+      "source": "명심보감 교우편(交友篇) (위키문헌 明心寶鑑, 앱 수록)"
+    },
+    {
+      "kind": "west",
+      "o": "A friend loves at all times, and a brother is born for adversity.",
+      "en": "A friend loves at all times, and a brother is born for adversity.",
+      "p": "벗은 언제나 사랑하고, 형제는 어려울 때를 위해 태어난다.",
+      "source": "잠언 17장 17절 (Proverbs 17:17, KJV) (앱 수록, 공개 판본)"
+    },
+    {
+      "kind": "proverb_ko",
+      "o": "옷은 새옷이 좋고 사람은 옛사람이 좋다.",
+      "p": "옷은 새것이 편해도, 사람은 오래 사귄 벗이 더 소중하다는 뜻입니다.",
+      "source": "우리 전래 속담"
+    },
+    {
+      "kind": "proverb_en",
+      "o": "A friend in need is a friend indeed.",
+      "p": "어려울 때 곁에 있어 주는 사람이 참된 벗이라는 뜻입니다.",
+      "source": "영국 전래 속담"
+    }
+  ]
+}

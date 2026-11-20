@@ -1,0 +1,33 @@
+{
+  "id": "yonggi",
+  "title": "용기",
+  "order": 15,
+  "items": [
+    {
+      "kind": "east",
+      "o": "子曰：「三軍可奪帥也，匹夫不可奪志也。」",
+      "p": "공자께서 말씀하셨다. “삼군의 장수는 빼앗을 수 있어도, 필부의 뜻은 빼앗을 수 없다.”",
+      "source": "『논어』 자한(子罕) 9.26. 한문 원전(공유). 풀이는 새로 씀.",
+      "e": "자왈: “삼군가탈수야, 필부불가탈지야.”"
+    },
+    {
+      "kind": "west",
+      "o": "If a thing is difficult to be accomplished by thyself, do not think that it is impossible for man: but if anything is possible for man and conformable to his nature, think that this can be attained by thyself too.",
+      "en": "If a thing is difficult to be accomplished by thyself, do not think that it is impossible for man: but if anything is possible for man and conformable to his nature, think that this can be attained by thyself too.",
+      "p": "어떤 일이 네게 어렵다고 해서 사람이 할 수 없는 일이라 여기지 말라. 사람이 할 수 있고 사람의 본성에 맞는 일이라면, 너도 해낼 수 있다고 생각하라.",
+      "source": "명상록 제6권 19절 (Book VI, 19) (앱 수록, 공개 판본)"
+    },
+    {
+      "kind": "proverb_ko",
+      "o": "호랑이 굴에 가야 호랑이 새끼를 잡는다.",
+      "p": "위험을 무릅쓰고 들어가야 큰일을 이룰 수 있다는 뜻입니다.",
+      "source": "우리 전래 속담"
+    },
+    {
+      "kind": "proverb_en",
+      "o": "Fortune favours the brave.",
+      "p": "행운은 용감한 사람을 돕는다는 뜻입니다.",
+      "source": "영국 전래 속담"
+    }
+  ]
+}
