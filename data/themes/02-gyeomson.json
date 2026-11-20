@@ -1,0 +1,40 @@
+{
+  "id": "gyeomson",
+  "title": "겸손",
+  "order": 2,
+  "items": [
+    {
+      "kind": "east",
+      "o": "《書》曰：「滿招損，謙受益。」",
+      "e": "서왈: “만초손, 겸수익.”",
+      "p": "『서경』에 이르기를, “가득 차면 덜어짐을 부르고, 겸손하면 보탬을 받는다.”",
+      "source": "명심보감 안분편(安分篇) (위키문헌 明心寶鑑, 앱 수록)"
+    },
+    {
+      "kind": "east",
+      "o": "《景行錄》云：「器滿則溢，人滿則喪。」",
+      "e": "경행록운: “기만즉일, 인만즉상.”",
+      "p": "『경행록』에 이르기를, “그릇이 차면 넘치고, 사람이 자만하면 잃는다.”",
+      "source": "명심보감 성심편(省心篇) (위키문헌 明心寶鑑, 앱 수록)"
+    },
+    {
+      "kind": "west",
+      "o": "When pride comes, then comes shame; but with the lowly is wisdom.",
+      "en": "When pride comes, then comes shame; but with the lowly is wisdom.",
+      "p": "교만이 오면 부끄러움도 온다. 그러나 겸손한 사람에게는 지혜가 있다.",
+      "source": "잠언 11장 2절 (Proverbs 11:2, KJV) (앱 수록, 공개 판본)"
+    },
+    {
+      "kind": "proverb_ko",
+      "o": "벼는 익을수록 고개를 숙인다.",
+      "p": "많이 이루어질수록, 익은 벼이삭처럼 겸손히 고개를 숙이라는 뜻입니다.",
+      "source": "우리 전래 속담"
+    },
+    {
+      "kind": "proverb_en",
+      "o": "Pride goes before a fall.",
+      "p": "교만하면 그 뒤에 넘어짐이 따른다는 뜻입니다.",
+      "source": "영국 전래 속담"
+    }
+  ]
+}

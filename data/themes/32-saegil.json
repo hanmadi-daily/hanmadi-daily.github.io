@@ -1,0 +1,40 @@
+{
+  "id": "saegil",
+  "title": "새로운 길",
+  "order": 32,
+  "items": [
+    {
+      "kind": "west",
+      "o": "Though thy beginning was small, yet thy latter end should greatly increase.",
+      "en": "Though thy beginning was small, yet thy latter end should greatly increase.",
+      "p": "시작은 작더라도, 나중은 크게 불어나리라.",
+      "source": "『욥기』 8장 7절, KJV(공유). 빌닷의 말. 영어는 KJV 원문입니다. 풀이는 새로 씀."
+    },
+    {
+      "kind": "east",
+      "o": "物有本末，事有終始，知所先後，則近道矣。",
+      "p": "물건에는 뿌리와 끝이 있고, 일에는 마침과 시작이 있으니, 먼저 할 것과 뒤에 할 것을 알면 도에 가깝다.",
+      "source": "『대학』(大學). 사서(四書) 가운데 하나. 한문 원전(공유). 풀이는 새로 씀.",
+      "e": "물유본말, 사유종시, 지소선후, 즉근도의."
+    },
+    {
+      "kind": "east",
+      "o": "千里之行，始於足下。",
+      "p": "천 리 길도 발밑에서 시작된다.",
+      "source": "『도덕경』 제64장. 한문 원전(공유). 풀이는 새로 씀.",
+      "e": "천리지행, 시어족하."
+    },
+    {
+      "kind": "proverb_ko",
+      "o": "시작이 반이다.",
+      "p": "일을 일단 시작하면, 이미 절반은 한 것이나 다름없다는 뜻입니다.",
+      "source": "우리 전래 속담"
+    },
+    {
+      "kind": "proverb_en",
+      "o": "Well begun is half done.",
+      "p": "시작을 잘하면, 이미 절반은 한 것이나 다름없다는 뜻입니다.",
+      "source": "영국 전래 속담"
+    }
+  ]
+}

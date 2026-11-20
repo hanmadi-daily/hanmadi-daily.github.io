@@ -2,7 +2,8 @@
   "name": "hanmadi-daily",
   "private": true,
   "scripts": {
-    "test": "node --test test/corpus.test.js test/offline.test.js"
+    "test": "node --test test/corpus.test.js test/offline.test.js test/themes.test.js",
+    "build:themes": "node scripts/build_themes.js"
   },
   "devDependencies": {
     "puppeteer-core": "^24.15.0"

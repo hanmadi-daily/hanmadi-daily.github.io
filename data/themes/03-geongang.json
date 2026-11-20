@@ -1,0 +1,33 @@
+{
+  "id": "geongang",
+  "title": "건강",
+  "order": 3,
+  "items": [
+    {
+      "kind": "east",
+      "o": "老來疾病，都是壯時招的；\n衰後罪孽，都是盛時作的。\n故持盈履滿，君子尤兢兢焉。",
+      "e": "노래질병, 도시장시초적;\n쇠후죄얼, 도시성시작적.\n고지영리만, 군자우긍긍언.",
+      "p": "늙어서 생기는 병은 모두 젊을 때 불러들인 것이고, 쇠한 뒤의 죄업은 모두 한창때 지은 것이다. 그러므로 가득 차고 넘칠 때 군자는 더욱 조심하고 또 조심한다.",
+      "source": "채근담 전집 제110장(前集 第110) (위키문헌 菜根譚 明刻本, 앱 수록)"
+    },
+    {
+      "kind": "west",
+      "o": "A merry heart does good like a medicine, but a broken spirit dries up the bones.",
+      "en": "A merry heart does good like a medicine, but a broken spirit dries up the bones.",
+      "p": "즐거운 마음은 약처럼 몸을 이롭게 하고, 꺾인 마음은 뼈를 마르게 한다.",
+      "source": "잠언 17장 22절 (Proverbs 17:22, KJV) (앱 수록, 공개 판본)"
+    },
+    {
+      "kind": "proverb_ko",
+      "o": "밥이 보약이다.",
+      "p": "약보다도 일상에서 제대로 먹는 것이 몸을 지키는 기본이라는 뜻입니다.",
+      "source": "우리 전래 속담"
+    },
+    {
+      "kind": "proverb_en",
+      "o": "Prevention is better than cure.",
+      "p": "병을 고치기보다, 미리 막아 두는 편이 낫다는 뜻입니다.",
+      "source": "영국 전래 속담"
+    }
+  ]
+}

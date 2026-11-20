@@ -1,0 +1,40 @@
+{
+  "id": "bujireon",
+  "title": "부지런함",
+  "order": 13,
+  "items": [
+    {
+      "kind": "east",
+      "o": "勤儉持家富，謙恭受益多。",
+      "e": "근검지가부, 겸공수익다.",
+      "p": "부지런하고 검소하게 집안을 꾸리면 넉넉해지고, 겸손하고 공손하면 얻는 것이 많다.",
+      "source": "증광현문 하집(下集) (위키문헌 增廣昔時賢文, 앱 수록)"
+    },
+    {
+      "kind": "west",
+      "o": "Early to bed and early to rise, makes a man healthy, wealthy, and wise.",
+      "en": "Early to bed and early to rise, makes a man healthy, wealthy, and wise.",
+      "p": "일찍 자고 일찍 일어나면 몸이 건강하고 살림이 넉넉하고 지혜로워진다.",
+      "source": "가난한 리처드의 달력 벤저민 프랭클린 (Poor Richard's Almanack) (앱 수록, 공개 판본)"
+    },
+    {
+      "kind": "west",
+      "o": "Laziness travels so slowly, that poverty soon overtakes him.",
+      "en": "Laziness travels so slowly, that poverty soon overtakes him.",
+      "p": "게으름은 너무 느리게 걸어서 가난이 곧 따라잡는다.",
+      "source": "가난한 리처드의 달력 벤저민 프랭클린 (Poor Richard's Almanack) (앱 수록, 공개 판본)"
+    },
+    {
+      "kind": "proverb_ko",
+      "o": "낙숫물이 댓돌을 뚫는다.",
+      "p": "작은 물방울도 그치지 않고 떨어지면 돌에 구멍을 낸다는 뜻입니다. 꾸준함이 큰일을 이룹니다.",
+      "source": "우리 전래 속담"
+    },
+    {
+      "kind": "proverb_en",
+      "o": "The early bird catches the worm.",
+      "p": "일찍 일어나는 새가 벌레를 잡듯이, 먼저 움직이는 사람이 기회를 얻는다는 뜻입니다.",
+      "source": "영국 전래 속담"
+    }
+  ]
+}

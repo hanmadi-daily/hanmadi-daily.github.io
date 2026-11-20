@@ -1,0 +1,40 @@
+{
+  "id": "bunno",
+  "title": "분노 다스리기",
+  "order": 10,
+  "items": [
+    {
+      "kind": "east",
+      "o": "忍一時之氣，免百日之憂。",
+      "e": "인일시지기, 면백일지우.",
+      "p": "한때의 분을 참으면 백 날의 근심을 면한다.",
+      "source": "명심보감 계성편(戒性篇) (위키문헌 明心寶鑑, 앱 수록)"
+    },
+    {
+      "kind": "east",
+      "o": "得忍且忍，得戒且戒。不忍不戒，小事成大。",
+      "e": "득인차인, 득계차계. 불인불계, 소사성대.",
+      "p": "참을 수 있으면 우선 참고, 삼갈 수 있으면 우선 삼가라. 참지 않고 삼가지 않으면 작은 일이 큰일이 된다.",
+      "source": "명심보감 계성편(戒性篇) (위키문헌 明心寶鑑, 앱 수록)"
+    },
+    {
+      "kind": "west",
+      "o": "A soft answer turns away wrath, but harsh words stir up anger.",
+      "en": "A soft answer turns away wrath, but harsh words stir up anger.",
+      "p": "부드러운 대답은 노여움을 가라앉히고, 모진 말은 화를 돋운다.",
+      "source": "잠언 15장 1절 (Proverbs 15:1, KJV) (앱 수록, 공개 판본)"
+    },
+    {
+      "kind": "proverb_ko",
+      "o": "참을 인(忍) 자 셋이면 살인도 피한다.",
+      "p": "분한 마음을 거듭 참으면, 큰 화까지도 면할 수 있다는 뜻입니다.",
+      "source": "우리 전래 속담"
+    },
+    {
+      "kind": "proverb_en",
+      "o": "Anger and haste hinder good counsel.",
+      "p": "노여움과 서두름은 바른 판단을 가로막는다는 뜻입니다.",
+      "source": "영국 전래 속담"
+    }
+  ]
+}

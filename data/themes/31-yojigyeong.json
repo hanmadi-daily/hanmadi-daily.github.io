@@ -1,0 +1,37 @@
+{
+  "id": "yojigyeong",
+  "title": "세상 법칙(요지경 법칙)",
+  "order": 31,
+  "items": [
+    {
+      "kind": "maxim",
+      "o": "Anything that can go wrong will go wrong.",
+      "p": "잘못될 수 있는 일은 반드시 잘못되기 마련이다.",
+      "source": "머피의 법칙(Murphy’s Law). 1949년경 미국 Edwards 기지에서 에드워드 머피 대위(Edward A. Murphy Jr.)의 실험과 관련해 전해지는 짧은 법칙입니다. 지금 흔히 쓰는 한 줄 문장의 정확한 첫 기록에는 이설이 있습니다. 짧은 표어로, 통상 저작권의 대상이 되지 않습니다."
+    },
+    {
+      "kind": "maxim",
+      "o": "Work expands so as to fill the time available for its completion.",
+      "p": "일은, 그 일을 마치도록 주어진 시간을 채울 때까지 늘어난다.",
+      "source": "파킨슨의 법칙(Parkinson’s Law). C. Northcote Parkinson이 1955년 11월 19일 The Economist에 처음 적은 한 줄입니다. 뒤에 나온 책의 긴 본문은 쓰지 않았습니다."
+    },
+    {
+      "kind": "maxim",
+      "o": "In a hierarchy, every employee tends to rise to his level of incompetence.",
+      "p": "계층 조직에서는, 직원마다 자신의 무능이 드러나는 자리까지 승진하는 경향이 있다.",
+      "source": "피터의 원리(The Peter Principle). Laurence J. Peter가 1969년 같은 제목의 책에서 내세운 짧은 명제입니다. 책의 긴 본문은 쓰지 않았습니다."
+    },
+    {
+      "kind": "maxim",
+      "o": "Power tends to corrupt, and absolute power corrupts absolutely.",
+      "p": "권력은 부패하기 쉽고, 절대 권력은 절대적으로 부패한다.",
+      "source": "액턴 경(Lord Acton). 1887년 4월 5일 크레이턴 주교에게 보낸 편지의 한 줄입니다. 액턴은 1902년에 작고하였고, 이 짧은 문장은 공유입니다."
+    },
+    {
+      "kind": "maxim",
+      "o": "On urban commuter expressways, peak-hour traffic congestion rises to meet maximum capacity.",
+      "p": "도시 출퇴근 도로에서는, 출퇴근 시간대 혼잡이 도로가 감당할 수 있는 최대까지 차오른다. 길을 새로 내거나 넓혀도, 차가 다시 들어찬다는 짧은 법칙입니다.",
+      "source": "다운스의 출퇴근 혼잡 법칙(The Law of Peak-Hour Expressway Congestion). Anthony Downs, Traffic Quarterly 16권 3호(1962년 7월) 399쪽의 한 줄입니다. 뒤에 흔히 유발 수요(induced demand)라고도 부릅니다. 논문의 긴 본문은 쓰지 않았습니다."
+    }
+  ]
+}

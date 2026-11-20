@@ -1,0 +1,25 @@
+{
+  "id": "oneul",
+  "title": "오늘을 소중히",
+  "order": 25,
+  "items": [
+    {
+      "kind": "east",
+      "o": "Carpe diem, quam minimum credula postero.",
+      "p": "오늘을 잡아라. 내일에 대해서는 되도록 적게 기대하라.",
+      "source": "호라티우스(Horace) 『가도(Odes)』 1.11. 라틴 원전(공유, 기원전 1세기). 풀이는 새로 씀."
+    },
+    {
+      "kind": "proverb_ko",
+      "o": "오늘 할 일을 내일로 미루지 마라.",
+      "p": "오늘 해 둘 일을 내일로 넘기지 말라는 뜻입니다.",
+      "source": "우리 전래 속담"
+    },
+    {
+      "kind": "proverb_en",
+      "o": "Never put off till tomorrow what you can do today.",
+      "p": "오늘 할 수 있는 일을 내일로 미루지 말라는 뜻입니다.",
+      "source": "영국 전래 속담"
+    }
+  ]
+}
