@@ -88,16 +88,26 @@ test('proverb slots stay at the end, at most one each', () => {
 });
 
 test('rotation starts on config date, no mid-cycle reshuffle', () => {
-  const { themeDayIndex, themesForDay, THEMES, THEME_START } = loadThemeFns();
+  const { themeDayIndex, themeSinceDay, themesForDay, THEMES, THEME_START } = loadThemeFns();
   const [sy, sm, sd] = THEME_START.split('-').map(Number);
   assert.equal(themeDayIndex(sy, sm, sd), 0);
   const day0 = themesForDay(0, THEMES);
-  assert.equal(day0.theme.id, THEMES.slice().sort((a, b) => a.order - b.order)[0].id);
-  const n = THEMES.length;
+  const atStart = THEMES.filter(t => themeSinceDay(t) <= 0).sort((a, b) => (a.order - b.order) || String(a.id).localeCompare(b.id));
+  assert.equal(day0.theme.id, atStart[0].id);
+  const n = atStart.length;
   const ids = [];
-  for (let i = 0; i < n; i++) ids.push(themesForDay(i, THEMES).theme.id);
+  for (let i = 0; i < n; i++) {
+    const r = themesForDay(i, THEMES);
+    assert.equal(r.list.length, n);
+    ids.push(r.theme.id);
+  }
   assert.equal(new Set(ids).size, n);
-  assert.equal(themesForDay(n, THEMES).theme.id, ids[0]);
+  const second = themesForDay(n, THEMES);
+  assert.equal(second.theme.id, ids[0]);
+  assert.equal(second.list.length, THEMES.length);
+  assert.equal(themesForDay(0, THEMES).list.some(t => t.id === 'ujeonguiri'), false);
+  assert.ok(second.list.some(t => t.id === 'ujeonguiri'));
+  assert.equal(themesForDay(n + n, THEMES).theme.id, 'ujeonguiri');
   // a late-added theme waits for the next cycle
   const extra = { id: 'extra-test', title: '추가', order: 99, since: `${sy}-${String(sm).padStart(2, '0')}-${String(sd + 1).padStart(2, '0')}`, items: [{ o: 'x', p: 'y', source: 'z' }] };
   // since = start+1, if start is day 0, since day is 1, still mid first cycle
@@ -106,7 +116,7 @@ test('rotation starts on config date, no mid-cycle reshuffle', () => {
   assert.equal(themesForDay(1, mixed).list.some(t => t.id === 'extra-test'), false);
   const after = themesForDay(n, mixed);
   assert.ok(after.list.some(t => t.id === 'extra-test'));
-  assert.equal(after.list.length, n + 1);
+  assert.equal(after.list.length, THEMES.length + 1);
   // days before start have no theme
   const before = new Date(Date.UTC(sy, sm - 1, sd - 1));
   assert.ok(themeDayIndex(before.getUTCFullYear(), before.getUTCMonth() + 1, before.getUTCDate()) < 0);
