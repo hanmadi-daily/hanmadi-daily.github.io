@@ -315,7 +315,7 @@ test('owner corrections agree in original, reading, and gloss', () => {
 
 test('service worker caches only the current corpus version', () => {
   const sw = fs.readFileSync(path.join(root, 'sw.js'), 'utf8');
-  assert.match(sw, /const CACHE = 'hanmadi-sarangibyeol-oon-20261125'/);
+  assert.match(sw, /const CACHE = 'hanmadi-donimyeonye-20261125'/);
   assert.match(sw, /caches\.delete\(key\)/);
   assert.match(sw, /cache\.match\(request\)/);
   assert.equal(sw.includes('caches.match('), false);
