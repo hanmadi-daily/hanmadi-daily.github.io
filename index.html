@@ -50,6 +50,11 @@ main{max-width:640px;margin:0 auto;padding:12px}
 /* THEME-CSS-BEGIN */
 .theme{background:#fbf6e8;border-color:#dcc9a0;border-left-color:#8a4b2a}
 .theme .book{color:#8a4b2a}
+.theme .head{flex-wrap:wrap;align-items:baseline;gap:4px 12px}
+.theme .head .book{flex:1 1 auto;min-width:0}
+.theme .head .no{flex:0 0 auto;margin-left:auto}
+.theme .head .theme-title{flex:1 1 100%;min-width:0;font-size:calc(16px*var(--fz));color:var(--sub);font-weight:400;word-break:keep-all;overflow-wrap:break-word}
+.theme .head .book .hz{display:block;margin-left:0;margin-top:2px;word-break:keep-all;overflow-wrap:break-word}
 .theme .item{margin:12px 0 16px;padding-bottom:10px;border-bottom:1px dashed var(--line)}
 .theme .item:last-child{border-bottom:0;padding-bottom:0}
 .theme .src{font-size:calc(14px*var(--fz));color:var(--sub);margin-top:6px}
@@ -208,7 +213,7 @@ function themeCard(theme, opt){
   opt=opt||{};
   if(!theme) return '';
   const items=orderedItems(theme);
-  let h='<section class="card theme"><div class="head"><div class="book">오늘의 주제<span class="hz">'+esc(theme.title)+'</span></div><div class="no">'+esc(opt.caption||'')+'</div></div>';
+  let h='<section class="card theme"><div class="head"><div class="book">오늘의 주제</div><div class="no">'+esc(opt.caption||'')+'</div><div class="theme-title">'+esc(theme.title)+'</div></div>';
   if(theme.intro) h+='<div class="theme-sub">'+esc(theme.intro)+'</div>';
   if(opt.sub) h+='<div class="theme-sub">'+esc(opt.sub)+'</div>';
   h+='</section>';
