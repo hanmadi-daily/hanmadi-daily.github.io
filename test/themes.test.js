@@ -111,6 +111,9 @@ test('rotation starts on config date, no mid-cycle reshuffle', () => {
   assert.equal(themesForDay(0, THEMES).list.some(t => t.id === 'jeonjaengpyeonghwa'), false);
   assert.ok(second.list.some(t => t.id === 'jeonjaengpyeonghwa'));
   assert.equal(themesForDay(n + n + 1, THEMES).theme.id, 'jeonjaengpyeonghwa');
+  assert.equal(themesForDay(0, THEMES).list.some(t => t.id === 'yoksimyokmang'), false);
+  assert.ok(second.list.some(t => t.id === 'yoksimyokmang'));
+  assert.equal(themesForDay(n + n + 2, THEMES).theme.id, 'yoksimyokmang');
   // a late-added theme waits for the next cycle
   const extra = { id: 'extra-test', title: '추가', order: 99, since: `${sy}-${String(sm).padStart(2, '0')}-${String(sd + 1).padStart(2, '0')}`, items: [{ o: 'x', p: 'y', source: 'z' }] };
   // since = start+1, if start is day 0, since day is 1, still mid first cycle
