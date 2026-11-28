@@ -1,4 +1,4 @@
-const CACHE = 'hanmadi-segeumnara-intro-20261126';
+const CACHE = 'hanmadi-sokgosokineunsegye-20261128';
 const PRECACHE = [
   './',
   './index.html',
