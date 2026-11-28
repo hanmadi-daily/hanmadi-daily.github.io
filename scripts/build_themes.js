@@ -40,6 +40,14 @@ function validate(theme, file) {
     if (!it.o || !it.p || !it.source) {
       throw new Error(file + ' 항목 ' + (i + 1) + ': o, p, source 가 필요합니다');
     }
+    if (it.full) {
+      const strip = (s) => String(s).normalize('NFKC').replace(/[\s\p{P}\p{S}]/gu, '');
+      const q = strip(it.o);
+      const f = strip(it.full);
+      if (q && !f.includes(q)) {
+        throw new Error(file + ' 항목 ' + (i + 1) + ': o 가 full 안에 없습니다');
+      }
+    }
   }
   if (theme.since && !/^\d{4}-\d{2}-\d{2}$/.test(theme.since)) {
     throw new Error(file + ': since 는 YYYY-MM-DD');
