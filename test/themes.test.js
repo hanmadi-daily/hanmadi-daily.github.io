@@ -25,7 +25,7 @@ function loadThemeFns() {
   assert.ok(start > 0 && end > start, 'theme runtime');
   const prelude = html.slice(html.indexOf('/* THEMES-BEGIN */'), html.indexOf('/* THEMES-END */') + '/* THEMES-END */'.length);
   const helpers = 'function esc(s){return String(s);}\nfunction todayYMD(){return [2026,11,21];}\n';
-  return new Function(prelude + helpers + html.slice(start, end) + '\nreturn {THEME_START,THEMES,themeStartYMD,themeDayIndex,themeSinceDay,themesForDay,orderedItems,findTheme,themeIndexHtml,themeCard,themeKindInfo,themeItemHtml};')();
+  return new Function(prelude + helpers + html.slice(start, end) + '\nreturn {THEME_START,THEMES,themeStartYMD,themeDayIndex,themeSinceDay,themesForDay,orderedItems,findTheme,themeIndexHtml,themeCard,themeKindInfo,themeItemHtml,highlightQuoteInFull,themeNormMap,toggleThemeFull};')();
 }
 
 test('every theme file is in the bundle and in the page', () => {
@@ -227,4 +227,54 @@ test('theme items are separate colored cards with a kind label', () => {
   assert.ok(html.includes('.cg{background:#f3f8ef;border-color:#c6dbbb;border-left-color:#4f7d3a}'));
   assert.ok(html.includes('.zg{background:#f1f5fb;border-color:#c3d2e6;border-left-color:#3f5f8f}'));
   assert.ok(html.includes('.we{background:#f7f2fa;border-color:#d8c8e3;border-left-color:#7a4f96}'));
+});
+
+
+test('full field keeps the quote as a verbatim-normalized substring, button only when full exists', () => {
+  const { THEMES, themeItemHtml, themeCard, highlightQuoteInFull } = loadThemeFns();
+  let withFull = 0;
+  for (const theme of THEMES) {
+    for (const [i, it] of theme.items.entries()) {
+      const html = themeItemHtml(it);
+      if (it.full) {
+        withFull += 1;
+        assert.ok(it.o, theme.id + ' #' + (i + 1) + ' quote');
+        assert.ok(it.full.includes(it.o), theme.id + ' #' + (i + 1) + ' o must be a substring of full');
+        assert.ok(html.includes('전체 원문 보기'), theme.id + ' button');
+        assert.ok(html.includes('class="theme-full'), theme.id + ' full box');
+        assert.ok(/class="theme-full hidden"/.test(html), theme.id + ' starts collapsed');
+        assert.ok(html.includes('<mark class="theme-quote">'), theme.id + ' mark');
+        assert.equal(html.includes('전체 원문 보기'), true);
+        if (/채근담/.test(it.source || '')) {
+          assert.fail(theme.id + ' #' + (i + 1) + ' 채근담 should not have full');
+        }
+      } else {
+        assert.equal(html.includes('전체 원문 보기'), false, theme.id + ' #' + (i + 1) + ' no button');
+        assert.equal(html.includes('class="theme-full'), false, theme.id + ' #' + (i + 1) + ' no full box');
+      }
+    }
+    if (theme.order < 34) {
+      assert.equal(theme.items.some(it => it.full), false, theme.id + ' older theme untouched');
+    }
+  }
+  assert.equal(withFull, 15);
+  const segeum = THEMES.find(t => t.id === 'segeumnara');
+  const tiger = segeum.items.find(it => (it.o || '').includes('苛政猛於虎也'));
+  assert.ok(tiger && tiger.full);
+  assert.equal(tiger.p, '정치가 매기는 가혹한 세금은 범보다 사납다.');
+  assert.ok(tiger.full_p.includes('가혹한 정사는 호랑이보다 사납다'));
+  const card = themeCard(segeum, { caption: 'x' });
+  assert.ok(card.includes('苛政猛於虎也'));
+  assert.ok(card.includes('전체 원문 보기'));
+  assert.ok(card.includes('孔子過泰山側'));
+  const sokgo = THEMES.find(t => t.id === 'sokgosokineunsegye');
+  const tigerRumor = sokgo.items.find(it => it.o === '三人言而成虎');
+  assert.ok(tigerRumor.full.includes('三人言而成虎'));
+  const htmlRumor = themeItemHtml(tigerRumor);
+  assert.ok(htmlRumor.includes('<mark class="theme-quote">三人言而成虎</mark>'));
+  // punctuation- and variant-tolerant highlight
+  const marked = highlightQuoteInFull('世謂李林甫「口有蜜，腹有劍。」', '口有蜜腹有劍');
+  assert.ok(marked.includes('<mark class="theme-quote">口有蜜，腹有劍</mark>'));
+  const variant = highlightQuoteInFull('何爲不去也', '何為不去也');
+  assert.ok(variant.includes('<mark class="theme-quote">何爲不去也</mark>'));
 });
